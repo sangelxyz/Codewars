@@ -1,0 +1,62 @@
+//Codewars challange
+// Simple Fun #79: Delete a Digit
+// Remove only 1 digit from a number, return the maximum number possible.
+// my code returns 100% . 
+// Author: sAngel.xyz
+
+// Two methods used.
+// first is to iterate number forwards, 
+// for each digit check the next digit is lower. If so remove and return.
+
+// Method 2 if this fails
+// interate number backwards, search for the lowest number to remove then return.
+
+function deleteDigit(n) {
+  num = String(n)
+  let nextnum=0
+
+  //Method 1
+  for(let i=0; i < num.length; i++) {
+      //if()
+      nextnum=num[i+1]
+      if(nextnum===undefined) {
+          nextnum=0
+      }
+
+
+      if(num[i] < nextnum) {
+          //console.log('yep it remove it.')
+          num = num.slice(0, i) + num.slice(i + 1);
+          replaced=true
+          // return number here.
+          return Number(num)
+      }
+  }
+
+  // Method 2
+  let newnum=""
+  for(let i=0; i < 10; i++) {
+      if(newnum = iterate_str(num,i)) {
+          // return number here
+          return newnum
+      }
+      else {
+          newnum=num
+      }
+
+  }  
+  
+}
+
+
+function iterate_str(num, remove) {
+    // number to iterate backwards, converts to string first. Returns number. 
+    num = num.toString()
+    for(let i=num.length-1; i > -1; i--) {
+        if(num[i] == remove) {
+            num = num.slice(0, i) + num.slice(i + 1);
+            return Number(num);
+        }    
+    }
+    return false
+}
