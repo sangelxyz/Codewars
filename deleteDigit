@@ -1,0 +1,13 @@
+function deleteDigit(n) {
+  // Convert Number to string.
+  // Using spread operator split string numbers into an object
+  // Use Object.keys and map function to iterate over numbers.
+  // - ForEach-Object might be possible however it uses callback functions.
+  // leading 0's are removed. non numbers.
+  // Arrow function is used to strip number from string
+  // Remove 1 digit then store in array using (...Object.keys)
+  // Math.max get max number. It also accepts strings as inputs, output is number.
+  
+  const s = String(n)
+  return Math.max(...Object.keys({...s}).map((_, b, arr) => s.slice(0, b) + s.slice(b + 1) ))
+}
