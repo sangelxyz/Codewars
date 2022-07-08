@@ -1,0 +1,74 @@
+function createTills(amt) {
+    // create tills
+    let tilsArr=[]
+    for(let i=0;  i < amt; i++) { 
+        tilsArr.push({ time: [] }) 
+    }
+    return tilsArr
+}
+
+function queuetil(time, tils) {
+    let getminQueue = queueLowest(tils)
+    tils[getminQueue].time.push(time)
+    return tils  
+}
+
+function queueLowest(tils) {
+    let arr = []
+    let id = []
+        for(let i=0; i < tils.length; i++) {    
+  
+            let sum = tils[i].time.reduce(function (a, b) {
+            return a + b;
+            }, 0);
+
+            // store total sum
+            id.push({id:i, total:sum})
+            arr.push(sum)
+
+        }
+        
+        let sum = Math.min.apply(null, arr)
+        for(let i of id) {
+            if(i.total === sum) {
+                return i.id
+            }
+        }
+
+
+}
+
+
+function queueLength(arr) {
+    //let arrayOfNumbers = [4, 12, 62, 70, -10];
+    let max_num = 0
+    let max =0
+    //let max=0
+    for(let max of arr) {
+
+        let sum = max.time.reduce(function (a, b) {
+            return a + b;
+            }, 0);
+
+        if(max_num < sum ) {
+            max_num=sum
+            
+        }
+        
+    }
+
+    return max_num
+}
+
+function queueTime(arr, amt){
+    // create tills
+    let tilsArr=createTills(amt)
+  
+    
+    // populate
+    for(let customer of arr) {
+        tilsArr=queuetil(customer, tilsArr)
+    }
+    
+    return queueLength(tilsArr)
+}
